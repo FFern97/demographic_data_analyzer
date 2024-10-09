@@ -9,7 +9,7 @@ def calculate_demographic_data(print_data=True):
     race_count = df['race'].value_counts()
 
     # What is the average age of men?
-    average_age_men = average_age_men = df[df['sex'] == 'Male']['age'].mean()
+    average_age_men = df[df['sex'] == 'Male']['age'].mean()
 
     # What is the percentage of people who have a Bachelor's degree?
     bachelors_df = df[df['education-num'] == 13]
@@ -31,11 +31,11 @@ def calculate_demographic_data(print_data=True):
 
     
     # percentage with salary >50K
-    higher_education_rich = None
-    lower_education_rich = None
+    higher_education_rich = fifty_plus_percentage
+    lower_education_rich = lower_but_high_salary
 
     # What is the minimum number of hours a person works per week (hours-per-week feature)?
-    min_work_hours = None
+    min_work_hours = df['hours-per-week'].min()
 
     # What percentage of the people who work the minimum number of hours per week have a salary of >50K?
     num_min_workers = None
