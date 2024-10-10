@@ -9,12 +9,12 @@ def calculate_demographic_data(print_data=True):
     race_count = df['race'].value_counts()
 
     # What is the average age of men?
-    average_age_men = average_age_men = df[df['sex'] == 'Male']['age'].mean()
+    average_age_men = average_age_men = df[df['sex'] == 'Male']['age'].mean().round(1)
 
     # What is the percentage of people who have a Bachelor's degree?
     bachelors_df = df[df['education-num'] == 13]
     valid_rows = df['education-num'].dropna().shape[0]
-    percentage_bachelors = (bachelors_df.shape[0] / valid_rows) * 100 
+    percentage_bachelors = round((bachelors_df.shape[0] / valid_rows) * 100, 1)  
 
     # What percentage of people with advanced education (`Bachelors`, `Masters`, or `Doctorate`) make more than 50K?
     # What percentage of people without advanced education make more than 50K?
@@ -22,12 +22,12 @@ def calculate_demographic_data(print_data=True):
     # with and without `Bachelors`, `Masters`, or `Doctorate`
     higher_education = df[(df['education'] == 'Bachelors') | (df['education'] == 'Masters') | (df['education'] == 'Doctorate')]
     advanced_and_high_salary = higher_education[higher_education['salary'] == '>50K']
-    fifty_plus_percentage = (advanced_and_high_salary.shape[0] / higher_education.shape[0]) * 100
+    fifty_plus_percentage = round((advanced_and_high_salary.shape[0] / higher_education.shape[0]) * 100, 1)
 
     
     lower_education = df[~((df['education'] == 'Bachelors') | (df['education'] == 'Masters') | (df['education'] == 'Doctorate'))]
     lower_education_salary = lower_education[lower_education['salary'] == '>50K']
-    lower_but_high_salary = (lower_education_salary.shape[0] / lower_education.shape[0]) * 100
+    lower_but_high_salary = round((lower_education_salary.shape[0] / lower_education.shape[0]) * 100, 1)
 
     
     # percentage with salary >50K
@@ -41,7 +41,7 @@ def calculate_demographic_data(print_data=True):
     min_workers = df[df['hours-per-week'] == min_work_hours] 
     rich_min_workers = min_workers[min_workers['salary'] == '>50K']
 
-    rich_percentage = (rich_min_workers.shape[0] / min_workers.shape[0] ) * 100
+    rich_percentage = round((rich_min_workers.shape[0] / min_workers.shape[0] ) * 100, 1)
 
     # What country has the highest percentage of people that earn >50K?
     
@@ -51,7 +51,7 @@ def calculate_demographic_data(print_data=True):
     
     
     rich_workers_per_country_percentage = (rich_workers_per_country /  total_people_per_country) * 100
-    highest_earning_country_percentage = rich_workers_per_country_percentage.max()
+    highest_earning_country_percentage = rich_workers_per_country_percentage.max().round(1)
     highest_earning_country = rich_workers_per_country_percentage.idxmax()
 
     # Identify the most popular occupation for those who earn >50K in India.
